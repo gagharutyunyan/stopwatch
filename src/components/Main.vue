@@ -58,6 +58,8 @@ export default {
         },
         reset(id) {
             this.stopwatchs[id].time.second = 0;
+            this.stopwatchs[id].time.minute = 0;
+            this.stopwatchs[id].time.hour = 0;
             this.stopwatchs[id].isActive = false;
             clearInterval(this.stopwatchs[id].interval);
             this.stopwatchs[id].interval = null;
@@ -73,6 +75,7 @@ export default {
                         minute: 0,
                         hour: 0,
                     },
+                    interval: null,
                 },
             ];
         },

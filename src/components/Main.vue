@@ -39,30 +39,33 @@ export default {
     },
     methods: {
         play(id) {
-            let second = this.stopwatchs[id].time.second;
-            this.stopwatchs[id].isActive = !this.stopwatchs[id].isActive;
-            if (this.stopwatchs[id].isActive) {
-                this.stopwatchs[id].interval = setInterval(() => {
-                    this.stopwatchs[id].time.second++;
-                    if (this.stopwatchs[id].time.second >= 60) {
-                        this.stopwatchs[id].time.second = 0;
-                        this.stopwatchs[id].time.minute++;
-                    } else if (this.stopwatchs[id].time.minute >= 60) {
-                        this.stopwatchs[id].time.minute = 0;
-                        this.stopwatchs[id].time.hour;
+            const stopwatch = this.stopwatchs[id];
+            const time = stopwatch.time;
+            stopwatch.isActive = !stopwatch.isActive;
+            if (stopwatch.isActive) {
+                stopwatch.interval = setInterval(() => {
+                    time.second++;
+                    if (time.second >= 60) {
+                        time.second = 0;
+                        time.minute++;
+                    } else if (time.minute >= 60) {
+                        time.minute = 0;
+                        time.hour;
                     }
                 }, 1000);
             } else {
-                clearInterval(this.stopwatchs[id].interval);
+                clearInterval(stopwatch.interval);
             }
         },
         reset(id) {
-            this.stopwatchs[id].time.second = 0;
-            this.stopwatchs[id].time.minute = 0;
-            this.stopwatchs[id].time.hour = 0;
-            this.stopwatchs[id].isActive = false;
-            clearInterval(this.stopwatchs[id].interval);
-            this.stopwatchs[id].interval = null;
+            const stopwatch = this.stopwatchs[id];
+            const time = stopwatch.time;
+            time.second = 0;
+            time.minute = 0;
+            time.hour = 0;
+            stopwatch.isActive = false;
+            clearInterval(stopwatch.interval);
+            stopwatch.interval = null;
         },
         add() {
             this.stopwatchs = [
